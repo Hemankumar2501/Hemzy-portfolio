@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "buildCommand": "vite build",
   "outputDirectory": "dist",
@@ -10,3 +11,17 @@
     }
   ]
 }
+=======
+{
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+>>>>>>> 931fe100fdf1f6145d039cefd0338a62c1053fed

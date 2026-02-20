@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 node_modules
 .git
 .vscode
 dist
 *.log
 .env.local
+=======
+node_modules
+.git
+.vscode
+dist
+*.log
+.env.local
+>>>>>>> 931fe100fdf1f6145d039cefd0338a62c1053fed
