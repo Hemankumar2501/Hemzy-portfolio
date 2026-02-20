@@ -13,6 +13,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Prevent layout shift on orientation change */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Smooth transition on orientation change */
+@media screen {
+  * {
+    transition-property: none !important;
+    transition-duration: 0s !important;
+  }
+  
+  body {
+    transition: none !important;
+  }
+}
+
+/* Re-enable transitions after orientation change */
+@media screen and (prefers-reduced-motion: no-preference) {
+  *:not(.no-transition) {
+    transition-property: all;
+    transition-duration: 0.3s;
+  }
 }
 
 /* Section stacking */
@@ -86,7 +111,7 @@ img {
    RESPONSIVE DESIGN - MOBILE FIRST
    ============================================ */
 
-/* Mobile devices (default) */
+/* Mobile devices (default) - Portrait */
 @media (max-width: 767px) {
   html {
     font-size: 14px;
@@ -97,7 +122,8 @@ img {
     position: relative !important;
     height: auto !important;
     min-height: auto !important;
-    padding: 4rem 1.5rem !important;
+    padding: 3rem 1.5rem !important;
+    overflow: visible !important;
   }
   
   /* Hide 3D models on mobile for performance */
@@ -115,7 +141,7 @@ img {
     transform: none !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 2rem auto !important;
+    margin: 1.5rem auto !important;
     padding: 0 !important;
   }
   
@@ -126,28 +152,45 @@ img {
   
   /* Mobile typography */
   h1 {
-    font-size: clamp(2rem, 8vw, 2.5rem) !important;
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
     text-align: center !important;
     line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
   }
   
   h2 {
-    font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
     text-align: center !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  h3 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
   }
   
   p {
     text-align: center !important;
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
   }
   
   /* Mobile buttons */
   .btn-cyan,
   .btn-outline {
     width: 100% !important;
-    max-width: 300px !important;
-    margin: 0 auto !important;
+    max-width: 280px !important;
+    margin: 0.5rem auto !important;
     display: block !important;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 0.95rem !important;
+  }
+  
+  /* Mobile button container */
+  .section-pinned div[class*="flex"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
   }
   
   /* Mobile skills - grid layout */
@@ -156,7 +199,7 @@ img {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
-    margin: 0.75rem !important;
+    margin: 0.5rem !important;
     display: inline-block !important;
   }
   
@@ -165,45 +208,199 @@ img {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1rem !important;
     padding: 1rem !important;
+    margin: 2rem auto !important;
   }
   
   /* Mobile stats cards */
   .data-card {
     padding: 1rem !important;
     margin: 0.5rem 0 !important;
+    text-align: center !important;
+  }
+  
+  /* Mobile grid layouts */
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
   }
   
   /* Mobile forms */
   input,
   textarea,
-  button {
+  button,
+  select {
     font-size: 16px !important; /* Prevents zoom on iOS */
+    width: 100% !important;
   }
   
   /* Hide decorative elements on mobile */
   .starfield,
-  .data-grid,
+  .data-grid {
+    opacity: 0.15 !important;
+  }
+  
   .noise-overlay {
-    opacity: 0.2 !important;
+    opacity: 0.02 !important;
+  }
+  
+  /* Mobile micro labels */
+  .micro-label {
+    font-size: 0.65rem !important;
+    display: block !important;
+    text-align: center !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  /* Mobile word spacing */
+  .word {
+    display: inline !important;
+    margin-right: 0.25rem !important;
+  }
+  
+  /* Mobile images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 1rem !important;
+  }
+  
+  /* Mobile footer */
+  footer {
+    padding: 2rem 1rem !important;
+  }
+  
+  footer .grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
   }
 }
 
-/* Small mobile devices */
+/* Mobile Landscape Mode */
+@media (max-width: 767px) and (orientation: landscape) {
+  html {
+    font-size: 13px;
+  }
+  
+  .section-pinned {
+    padding: 2rem 1rem !important;
+    min-height: auto !important;
+  }
+  
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 1.75rem) !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .section-pinned > div {
+    margin: 1rem auto !important;
+  }
+  
+  /* Landscape skills grid - 4 columns */
+  .skills-orbital-system {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem !important;
+  }
+  
+  /* Landscape buttons - side by side */
+  .section-pinned div[class*="flex"] {
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .btn-cyan,
+  .btn-outline {
+    width: auto !important;
+    max-width: 200px !important;
+    padding: 0.75rem 1.25rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Landscape stats - horizontal */
+  .data-card {
+    padding: 0.75rem !important;
+  }
+  
+  /* Reduce vertical spacing in landscape */
+  .section-pinned {
+    padding: 1.5rem 1rem !important;
+  }
+}
+
+/* Small mobile devices - Portrait */
 @media (max-width: 480px) {
   html {
     font-size: 13px;
   }
   
   .section-pinned {
-    padding: 3rem 1rem !important;
+    padding: 2.5rem 1rem !important;
   }
   
   h1 {
-    font-size: clamp(1.75rem, 7vw, 2rem) !important;
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
   }
   
+  h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+  
+  /* Single column skills on very small screens */
   .skills-orbital-system {
     grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  
+  .skill-orbit {
+    margin: 0.25rem !important;
+  }
+  
+  /* Smaller buttons on small screens */
+  .btn-cyan,
+  .btn-outline {
+    max-width: 240px !important;
+    padding: 0.75rem 1.25rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Compact data cards */
+  .data-card {
+    padding: 0.75rem !important;
+  }
+}
+
+/* Small mobile devices - Landscape */
+@media (max-width: 480px) and (orientation: landscape) {
+  .section-pinned {
+    padding: 1.5rem 0.75rem !important;
+  }
+  
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.25rem !important;
+  }
+  
+  p {
+    font-size: 0.8rem !important;
+  }
+  
+  /* 3 columns in landscape for small screens */
+  .skills-orbital-system {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
@@ -265,21 +462,86 @@ img {
   .section-pinned {
     min-height: -webkit-fill-available;
   }
+  
+  /* Fix for iOS Safari bottom bar */
+  @media (max-width: 767px) {
+    .section-pinned {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+  }
 }
 
-/* Landscape mobile devices */
-@media (max-height: 600px) and (orientation: landscape) {
+/* Additional landscape optimizations for all mobile sizes */
+@media (max-height: 600px) and (orientation: landscape) and (max-width: 1024px) {
   .section-pinned {
     min-height: auto !important;
-    padding: 2rem 1rem !important;
+    padding: 1.5rem 1rem !important;
   }
   
   h1 {
-    font-size: 1.75rem !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
   }
   
   h2 {
-    font-size: 1.5rem !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Compact spacing in short landscape */
+  .section-pinned > div {
+    margin: 0.75rem auto !important;
+  }
+  
+  /* Hide micro labels in short landscape */
+  .micro-label {
+    display: none !important;
+  }
+  
+  /* Compact navigation */
+  nav {
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* Very short landscape (like iPhone SE landscape) */
+@media (max-height: 400px) and (orientation: landscape) {
+  .section-pinned {
+    padding: 1rem 0.75rem !important;
+  }
+  
+  h1 {
+    font-size: 1.25rem !important;
+  }
+  
+  h2 {
+    font-size: 1.1rem !important;
+  }
+  
+  p {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .btn-cyan,
+  .btn-outline {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .data-card {
+    padding: 0.5rem !important;
+  }
+  
+  .skills-orbital-system {
+    gap: 0.5rem !important;
+    padding: 0.5rem !important;
   }
 }
 
@@ -303,5 +565,91 @@ img {
   /* Remove hover effects on touch devices */
   .group:hover .group-hover\:shadow-neon {
     box-shadow: none;
+  }
+  
+  /* Better tap feedback */
+  button:active,
+  a:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
+}
+
+/* Specific device optimizations */
+
+/* iPhone SE, iPhone 6/7/8 - Portrait */
+@media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+  html {
+    font-size: 13px;
+  }
+  
+  .section-pinned {
+    padding: 2rem 1rem !important;
+  }
+}
+
+/* iPhone SE, iPhone 6/7/8 - Landscape */
+@media (max-width: 667px) and (max-height: 375px) and (orientation: landscape) {
+  .section-pinned {
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .skills-orbital-system {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* iPhone X/11/12/13/14 - Portrait */
+@media (max-width: 428px) and (min-height: 800px) and (orientation: portrait) {
+  .section-pinned {
+    padding: 3rem 1.5rem !important;
+  }
+}
+
+/* iPhone X/11/12/13/14 - Landscape */
+@media (max-width: 926px) and (max-height: 428px) and (orientation: landscape) {
+  .section-pinned {
+    padding: 1.5rem 2rem !important;
+  }
+  
+  .skills-orbital-system {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* iPad Mini/Air - Portrait */
+@media (min-width: 768px) and (max-width: 820px) and (orientation: portrait) {
+  html {
+    font-size: 15px;
+  }
+  
+  .section-pinned {
+    padding: 4rem 2rem !important;
+  }
+}
+
+/* iPad Mini/Air - Landscape */
+@media (min-width: 1024px) and (max-width: 1180px) and (orientation: landscape) {
+  .skills-orbital-system {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* Prevent text size adjustment on orientation change */
+@media screen and (orientation: portrait) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 }
