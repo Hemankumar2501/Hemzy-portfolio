@@ -78,7 +78,7 @@ export default function GitHubStats() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen py-24 px-8 bg-dark-bg overflow-hidden"
+      className="relative min-h-screen py-16 px-8 bg-dark-bg overflow-hidden"
     >
       {/* Starfield background */}
       <div className="absolute inset-0 starfield opacity-30" />

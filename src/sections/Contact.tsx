@@ -87,6 +87,7 @@ export default function Contact() {
 
   return (
     <section 
+      id="contact"
       ref={sectionRef} 
       className="section-pinned bg-dark-bg z-[60]"
     >

@@ -219,7 +219,13 @@ export default function Hero() {
             href="#work" 
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
+              const element = document.querySelector('#work');
+              if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              }
             }}
             className="btn-cyan"
           >
@@ -229,7 +235,13 @@ export default function Hero() {
             href="#contact" 
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              const element = document.querySelector('#contact');
+              if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              }
             }}
             className="btn-outline"
           >

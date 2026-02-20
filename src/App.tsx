@@ -50,20 +50,14 @@ function App() {
       {/* Main content */}
       <main className="relative">
         <Hero />
-        <div id="about">
-          <About />
-        </div>
+        <About />
         <Skills />
-        <div id="work">
-          <Projects />
-        </div>
+        <Projects />
         <Certifications />
         <GitHubStats />
         <Process />
         <Testimonials />
-        <div id="contact">
-          <Contact />
-        </div>
+        <Contact />
         <Footer />
       </main>
     </div>

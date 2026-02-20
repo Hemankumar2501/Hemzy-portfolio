@@ -45,6 +45,29 @@ section {
   position: relative;
 }
 
+/* Reduce spacing between sections */
+section + section {
+  margin-top: 0;
+}
+
+/* Compact section spacing on mobile */
+@media (max-width: 767px) {
+  section {
+    margin-bottom: 0 !important;
+  }
+  
+  section + section {
+    margin-top: 0 !important;
+  }
+}
+
+/* Desktop section spacing */
+@media (min-width: 768px) {
+  section + section {
+    margin-top: 0;
+  }
+}
+
 /* 3D Canvas styling */
 canvas {
   display: block;
@@ -122,13 +145,37 @@ img {
     position: relative !important;
     height: auto !important;
     min-height: auto !important;
-    padding: 3rem 1.5rem !important;
+    padding: 1.5rem 1.5rem !important;
     overflow: visible !important;
   }
   
-  /* Hide 3D models on mobile for performance */
-  canvas {
+  /* Reduce spacing for non-pinned sections */
+  section:not(.section-pinned) {
+    padding: 2rem 1.5rem !important;
+    min-height: auto !important;
+  }
+  
+  /* FORCE HIDE all 3D models and canvases on mobile */
+  canvas,
+  canvas *,
+  div[class*="canvas"],
+  .section-pinned canvas,
+  section canvas {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+  
+  /* Hide 3D character containers */
+  div[style*="zIndex: 3"],
+  div[style*="z-index: 3"],
+  div[style*="zIndex: 2"],
+  div[style*="z-index: 2"] {
+    display: none !important;
+    height: 0 !important;
   }
   
   /* Make all absolute positioned elements relative on mobile */
@@ -141,7 +188,7 @@ img {
     transform: none !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 1.5rem auto !important;
+    margin: 0.75rem auto !important;
     padding: 0 !important;
   }
   

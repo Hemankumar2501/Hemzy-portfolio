@@ -135,6 +135,7 @@ export default function Projects() {
 
   return (
     <section 
+      id="work"
       ref={sectionRef} 
       className="section-pinned bg-dark-bg z-40"
     >

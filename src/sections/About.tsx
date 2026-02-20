@@ -98,6 +98,7 @@ export default function About() {
 
   return (
     <section 
+      id="about"
       ref={sectionRef} 
       className="section-pinned bg-dark-bg z-20"
     >
