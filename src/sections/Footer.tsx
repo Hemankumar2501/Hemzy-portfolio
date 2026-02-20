@@ -52,13 +52,6 @@ export default function Footer() {
     return () => ctx.revert();
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer 
       ref={sectionRef} 
@@ -90,7 +83,7 @@ export default function Footer() {
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
-                      scrollToSection(link.href);
+                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className="text-muted-foreground hover:text-cyan transition-colors text-sm cursor-pointer"
                   >
@@ -111,7 +104,7 @@ export default function Footer() {
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
-                      scrollToSection(link.href);
+                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className="text-muted-foreground hover:text-cyan transition-colors text-sm cursor-pointer"
                   >
@@ -130,8 +123,6 @@ export default function Footer() {
                 <li key={link.name}>
                   <a 
                     href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-muted-foreground hover:text-cyan transition-colors text-sm"
                   >
                     {link.name}

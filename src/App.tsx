@@ -81,18 +81,12 @@ function App() {
         <div id="about">
           <About />
         </div>
-        <div id="skills">
-          <Skills />
-        </div>
+        <Skills />
         <div id="work">
           <Projects />
         </div>
-        <div id="certifications">
-          <Certifications />
-        </div>
-        <div id="stats">
-          <GitHubStats />
-        </div>
+        <Certifications />
+        <GitHubStats />
         <Process />
         <Testimonials />
         <div id="contact">

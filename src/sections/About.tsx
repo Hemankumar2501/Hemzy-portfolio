@@ -148,78 +148,43 @@ export default function About() {
 
       {/* Text block */}
       <div 
-        className="absolute left-[46vw] top-[20vh] w-[44vw]"
+        className="absolute left-[46vw] top-[24vh] w-[44vw]"
         style={{ zIndex: 4 }}
       >
-        <div className="flex items-center gap-3 mb-4">
-          <div className="px-3 py-1 rounded-full bg-gradient-to-r from-cyan/20 to-purple-500/20 border border-cyan/40">
-            <span className="text-cyan font-mono text-sm">LEVEL 4 STUDENT</span>
-          </div>
-          <div className="px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/40">
-            <span className="text-yellow-400 font-mono text-sm">GRADUATING 2026</span>
-          </div>
-        </div>
-
         <h2 
           ref={headlineRef}
           className="font-orbitron font-bold text-[clamp(36px,4vw,64px)] text-white opacity-0"
         >
-          PLAYER <span className="text-cyan neon-text">PROFILE</span>
+          ABOUT <span className="text-purple neon-text-purple">ME</span>
         </h2>
         
         <div ref={bodyRef} className="mt-6 space-y-4 opacity-0">
           <p className="text-muted-foreground text-lg leading-relaxed">
-            I'm Hemankumar, currently grinding through Level 4 (4th year) of my BTech AI & Data Science quest at Tagore Engineering College, Chennai. My mission: master AI and Data Science to solve real-world boss battles.
+            I'm <span className="text-white font-semibold">Hemankumar</span>, a 4th year BTech AI & Data Science student at <span className="text-cyan">Tagore Engineering College</span>, Chennai. Passionate about building intelligent systems that solve real-world problems.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Equipped with Python, Machine Learning, Deep Learning, and SQL skills, I transform raw data into powerful insights. Every dataset is a new dungeon to explore, every problem a puzzle to solve.
+            With expertise in <span className="text-cyan">Python</span>, <span className="text-purple">Machine Learning</span>, <span className="text-cyan">Deep Learning</span>, and <span className="text-purple">SQL</span>, I transform complex data into actionable insights. From data preprocessing to model deployment, I build end-to-end AI solutions.
           </p>
-          
-          {/* Journey Timeline */}
-          <div className="mt-6 space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center flex-shrink-0">
-                <span className="text-green-400 text-xs font-bold">✓</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold">Level 1-3: Foundation Quest</p>
-                <p className="text-muted-foreground text-sm">Mastered core programming, data structures, and ML fundamentals</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-cyan/20 border-2 border-cyan flex items-center justify-center flex-shrink-0 animate-pulse">
-                <span className="text-cyan text-xs font-bold">4</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold">Level 4: Advanced Campaign (Current)</p>
-                <p className="text-muted-foreground text-sm">Deep learning, cloud computing, and real-world project deployment</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-purple-500/20 border-2 border-purple-500/40 flex items-center justify-center flex-shrink-0">
-                <span className="text-purple-400 text-xs font-bold">→</span>
-              </div>
-              <div>
-                <p className="text-white font-semibold">Next Quest: Industry Boss Battle</p>
-                <p className="text-muted-foreground text-sm">Ready to join a team and tackle production-level challenges</p>
-              </div>
-            </div>
+          <div className="flex items-center gap-2 pt-2">
+            <div className="h-px flex-1 bg-gradient-to-r from-cyan/50 to-transparent" />
+            <span className="font-mono text-xs text-cyan">DATA → INSIGHTS → IMPACT</span>
+            <div className="h-px flex-1 bg-gradient-to-l from-purple/50 to-transparent" />
           </div>
         </div>
 
         {/* Stats */}
-        <div ref={statsRef} className="mt-8 flex gap-4">
-          <div className="stat-chip">
-            <span className="block text-2xl font-bold text-white">4th</span>
-            <span className="text-xs text-cyan/70">YEAR</span>
+        <div ref={statsRef} className="mt-8 grid grid-cols-3 gap-4">
+          <div className="data-card">
+            <span className="block text-2xl font-bold text-cyan">BTech</span>
+            <span className="text-xs text-muted-foreground">AI & Data Science</span>
           </div>
-          <div className="stat-chip">
-            <span className="block text-2xl font-bold text-white">AI & DS</span>
-            <span className="text-xs text-cyan/70">SPECIALIZATION</span>
+          <div className="data-card">
+            <span className="block text-2xl font-bold text-purple">2026</span>
+            <span className="text-xs text-muted-foreground">Graduating</span>
           </div>
-          <div className="stat-chip">
-            <span className="block text-2xl font-bold text-white">2+</span>
-            <span className="text-xs text-cyan/70">INTERNSHIPS</span>
+          <div className="data-card">
+            <span className="block text-2xl font-bold text-green">2+</span>
+            <span className="text-xs text-muted-foreground">Internships</span>
           </div>
         </div>
       </div>

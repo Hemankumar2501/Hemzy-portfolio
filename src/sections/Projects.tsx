@@ -12,9 +12,6 @@ const projects = [
     description: 'Intelligent career planning platform leveraging AI/ML algorithms for personalized pathways.',
     image: '/project_01.jpg',
     tags: ['Python', 'Machine Learning', 'AI'],
-    difficulty: 'HARD',
-    xp: 850,
-    status: 'COMPLETED'
   },
   {
     id: 2,
@@ -22,9 +19,6 @@ const projects = [
     description: 'Real-time sentiment analysis platform using AWS for customer feedback analysis.',
     image: '/project_02.jpg',
     tags: ['AWS', 'Sentiment Analysis', 'Cloud'],
-    difficulty: 'MEDIUM',
-    xp: 650,
-    status: 'COMPLETED'
   },
   {
     id: 3,
@@ -32,9 +26,6 @@ const projects = [
     description: 'Collection of data analysis and visualization projects using Python and SQL.',
     image: '/project_03.jpg',
     tags: ['Python', 'SQL', 'Data Analysis'],
-    difficulty: 'MEDIUM',
-    xp: 720,
-    status: 'COMPLETED'
   },
   {
     id: 4,
@@ -42,9 +33,6 @@ const projects = [
     description: 'Neural network implementations for image and text classification tasks.',
     image: '/project_04.jpg',
     tags: ['Deep Learning', 'TensorFlow', 'Python'],
-    difficulty: 'HARD',
-    xp: 900,
-    status: 'COMPLETED'
   },
   {
     id: 5,
@@ -52,9 +40,6 @@ const projects = [
     description: 'Implementation of various machine learning algorithms from scratch.',
     image: '/project_05.jpg',
     tags: ['Machine Learning', 'Python', 'Scikit-learn'],
-    difficulty: 'MEDIUM',
-    xp: 780,
-    status: 'COMPLETED'
   },
 ];
 
@@ -173,18 +158,13 @@ export default function Projects() {
         className="absolute left-[6vw] top-[10vh] opacity-0"
         style={{ zIndex: 5 }}
       >
-        <span className="micro-label block mb-2">COMPLETED QUESTS</span>
+        <span className="micro-label block mb-2">
+          <span className="text-purple">●</span> PORTFOLIO SHOWCASE
+        </span>
         <h2 className="font-orbitron font-bold text-[clamp(32px,3.5vw,56px)] text-white">
-          PROJECT <span className="text-cyan neon-text">ARCHIVE</span>
+          AI & DATA <span className="text-purple neon-text-purple">PROJECTS</span>
         </h2>
-        <div className="mt-3 flex items-center gap-3">
-          <div className="px-3 py-1 rounded-full bg-green-500/20 border border-green-500/40">
-            <span className="text-green-400 font-mono text-sm">5 QUESTS COMPLETED</span>
-          </div>
-          <div className="px-3 py-1 rounded-full bg-cyan/20 border border-cyan/40">
-            <span className="text-cyan font-mono text-sm">3,900 XP EARNED</span>
-          </div>
-        </div>
+        <p className="text-muted-foreground mt-2 text-sm">Real-world solutions powered by machine learning</p>
       </div>
 
       {/* 3D Carousel */}
@@ -227,25 +207,6 @@ export default function Projects() {
                     <div className="absolute inset-0 rounded-2xl border-2 border-cyan animate-ring-pulse pointer-events-none" style={{ zIndex: 10 }} />
                   )}
                   
-                  {/* Difficulty Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <div className={`px-3 py-1 rounded-full font-mono text-xs font-bold ${
-                      project.difficulty === 'HARD' 
-                        ? 'bg-red-500/20 border border-red-500/40 text-red-400' 
-                        : 'bg-yellow-500/20 border border-yellow-500/40 text-yellow-400'
-                    }`}>
-                      {project.difficulty}
-                    </div>
-                  </div>
-
-                  {/* Status Badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="px-3 py-1 rounded-full bg-green-500/20 border border-green-500/40 text-green-400 font-mono text-xs font-bold flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                      {project.status}
-                    </div>
-                  </div>
-                  
                   {/* Image */}
                   <img 
                     src={project.image} 
@@ -260,15 +221,6 @@ export default function Projects() {
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="font-orbitron font-bold text-xl text-white mb-2">{project.title}</h3>
                     <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
-                    
-                    {/* XP Reward */}
-                    <div className="mb-3 flex items-center gap-2">
-                      <div className="flex-1 h-1 bg-dark-bg rounded-full overflow-hidden">
-                        <div className="h-full w-full bg-gradient-to-r from-cyan to-purple-500" />
-                      </div>
-                      <span className="text-cyan font-mono text-sm font-bold">+{project.xp} XP</span>
-                    </div>
-                    
                     <div className="flex gap-2 flex-wrap">
                       {project.tags.map(tag => (
                         <span key={tag} className="px-2 py-1 rounded bg-cyan/10 text-cyan text-xs font-mono">

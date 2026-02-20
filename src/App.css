@@ -13,9 +13,6 @@ section {
 /* 3D Canvas styling */
 canvas {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
-  outline: none;
 }
 
 /* Ensure proper z-index stacking for pinned sections */
@@ -113,9 +110,9 @@ canvas {
     min-height: auto !important;
   }
   
-  /* Hide 3D canvas on mobile ONLY for performance */
+  /* Hide 3D canvas on mobile for performance */
   section canvas {
-    display: none !important;
+    display: none;
   }
   
   /* Mobile skills layout - grid instead of orbit */
@@ -201,13 +198,6 @@ canvas {
   }
 }
 
-/* Desktop - ensure canvas is visible */
-@media (min-width: 769px) {
-  canvas {
-    display: block !important;
-  }
-}
-
 @media (max-width: 480px) {
   /* Small mobile adjustments */
   html {
@@ -252,33 +242,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* Level badge animations */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes bounce-slow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s ease-in-out infinite;
 }
 
 

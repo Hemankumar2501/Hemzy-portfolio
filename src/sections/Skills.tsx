@@ -22,65 +22,49 @@ const skills = [
     name: 'Python', 
     icon: Code2, 
     angle: 0,
-    level: 85,
-    description: 'Strong proficiency in Python for data analysis, automation, backend development, and AI/ML projects.',
-    xp: '850/1000 XP'
+    description: 'Strong proficiency in Python for data analysis, automation, backend development, and AI/ML projects.'
   },
   { 
     name: 'Machine Learning', 
     icon: Brain, 
     angle: 45,
-    level: 75,
-    description: 'Hands-on experience in developing, training, and evaluating machine learning models for predictive tasks.',
-    xp: '750/1000 XP'
+    description: 'Hands-on experience in developing, training, and evaluating machine learning models for predictive tasks.'
   },
   { 
     name: 'Deep Learning', 
     icon: Cpu, 
     angle: 90,
-    level: 70,
-    description: 'Building intelligent systems using AI techniques to automate tasks and solve real-world problems.',
-    xp: '700/1000 XP'
+    description: 'Building intelligent systems using AI techniques to automate tasks and solve real-world problems.'
   },
   { 
     name: 'SQL', 
     icon: Database, 
     angle: 135,
-    level: 80,
-    description: 'Efficient in writing optimized queries to manage, retrieve, and analyze structured database data.',
-    xp: '800/1000 XP'
+    description: 'Efficient in writing optimized queries to manage, retrieve, and analyze structured database data.'
   },
   { 
     name: 'Data Analysis', 
     icon: GitBranch, 
     angle: 180,
-    level: 82,
-    description: 'Skilled in collecting, cleaning, and analyzing data to extract insights and support data-driven decisions.',
-    xp: '820/1000 XP'
+    description: 'Skilled in collecting, cleaning, and analyzing data to extract insights and support data-driven decisions.'
   },
   { 
     name: 'AWS', 
     icon: Cloud, 
     angle: 225,
-    level: 65,
-    description: 'Experience with cloud-based services for deploying, managing, and scaling applications efficiently.',
-    xp: '650/1000 XP'
+    description: 'Experience with cloud-based services for deploying, managing, and scaling applications efficiently.'
   },
   { 
     name: 'Excel', 
     icon: Server, 
     angle: 270,
-    level: 78,
-    description: 'Advanced Excel skills for data manipulation, visualization, and business analytics.',
-    xp: '780/1000 XP'
+    description: 'Advanced Excel skills for data manipulation, visualization, and business analytics.'
   },
   { 
     name: 'AI', 
     icon: Smartphone, 
     angle: 315,
-    level: 72,
-    description: 'Building intelligent systems using AI techniques to automate tasks and solve real-world problems.',
-    xp: '720/1000 XP'
+    description: 'Building intelligent systems using AI techniques to automate tasks and solve real-world problems.'
   },
 ];
 
@@ -176,58 +160,39 @@ export default function Skills() {
         style={{ zIndex: 5 }}
       >
         {selectedSkill ? (
-          <div className="glass-panel rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                {React.createElement(selectedSkill.icon, { className: "w-8 h-8 text-cyan" })}
-                <h3 className="font-orbitron font-bold text-2xl text-white">{selectedSkill.name}</h3>
-              </div>
-              <div className="px-3 py-1 rounded-full bg-cyan/20 border border-cyan/40">
-                <span className="text-cyan font-mono text-sm">LVL {selectedSkill.level}</span>
-              </div>
+          <div className="glass-panel rounded-2xl p-6 neural-glow">
+            <div className="flex items-center gap-3 mb-4">
+              {React.createElement(selectedSkill.icon, { className: "w-8 h-8 text-purple" })}
+              <h3 className="font-orbitron font-bold text-2xl text-white">{selectedSkill.name}</h3>
             </div>
-            
-            {/* XP Progress Bar */}
-            <div className="mb-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs text-muted-foreground font-mono">EXPERIENCE</span>
-                <span className="text-xs text-cyan font-mono">{selectedSkill.xp}</span>
-              </div>
-              <div className="h-2 bg-dark-bg rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-cyan to-purple-500 rounded-full transition-all duration-500"
-                  style={{ width: `${selectedSkill.level}%` }}
-                />
-              </div>
-            </div>
-            
             <p className="text-muted-foreground leading-relaxed">
               {selectedSkill.description}
             </p>
             <button 
               onClick={() => setSelectedSkill(null)}
-              className="mt-4 text-cyan text-sm hover:text-cyan-light transition-colors"
+              className="mt-4 text-purple text-sm hover:text-purple-light transition-colors flex items-center gap-1"
             >
               ← Back to skill tree
             </button>
           </div>
         ) : (
           <>
-            <div className="mb-4">
-              <h2 className="font-orbitron font-bold text-3xl text-white mb-2">
-                SKILL <span className="text-cyan neon-text">TREE</span>
-              </h2>
-              <div className="h-1 w-16 bg-gradient-to-r from-cyan to-purple-500 rounded-full" />
+            <div className="micro-label mb-3">
+              <span className="text-purple">●</span> TECHNICAL EXPERTISE
             </div>
+            <h2 className="font-orbitron font-bold text-[clamp(28px,3vw,48px)] text-white mb-4">
+              SKILL <span className="text-purple neon-text-purple">MATRIX</span>
+            </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Master the art of AI & Data Science through continuous learning and hands-on projects.
+              Specialized in Python, Machine Learning, Deep Learning, and Data Analysis with hands-on experience in AI/ML projects.
             </p>
             <p className="mt-4 text-muted-foreground text-sm">
-              Each skill represents hours of practice, projects completed, and challenges overcome.
+              From data preprocessing to model deployment, I build end-to-end solutions that deliver real business value.
             </p>
-            <p className="mt-4 text-cyan text-sm font-semibold">
-              Click on any skill to view details →
-            </p>
+            <div className="mt-4 flex items-center gap-2">
+              <div className="h-px w-8 bg-gradient-to-r from-purple to-transparent" />
+              <span className="text-purple text-sm font-semibold">Click any skill to explore →</span>
+            </div>
           </>
         )}
       </div>
@@ -247,8 +212,8 @@ export default function Skills() {
             transformStyle: 'preserve-3d'
           }}
         >
-          <div className="absolute inset-[5%] rounded-full border-2 border-cyan/40 animate-rotate-slow" />
-          <div className="absolute inset-[15%] rounded-full border border-cyan/30 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
+          <div className="absolute inset-[5%] rounded-full border-2 border-purple/40 animate-rotate-slow" />
+          <div className="absolute inset-[15%] rounded-full border border-purple/30 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
           <div className="absolute inset-[25%] rounded-full border border-cyan/20 animate-rotate-slow" style={{ animationDuration: '30s' }} />
           
           {/* Hexagon outline */}
@@ -260,7 +225,7 @@ export default function Skills() {
             <polygon 
               points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" 
               fill="none" 
-              stroke="rgba(0, 240, 255, 0.15)" 
+              stroke="rgba(184, 41, 247, 0.15)" 
               strokeWidth="1"
             />
           </svg>
@@ -272,7 +237,7 @@ export default function Skills() {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[12vw] h-[12vw] opacity-0"
           style={{ zIndex: 4 }}
         >
-          <div className="relative w-full h-full rounded-full bg-dark-panel border-2 border-cyan/50 shadow-neon overflow-hidden">
+          <div className="relative w-full h-full rounded-full bg-dark-panel border-2 border-purple/50 shadow-neon overflow-hidden">
             {/* 3D Hat in center */}
             <div className="absolute inset-0">
               <Canvas
@@ -306,23 +271,10 @@ export default function Skills() {
                 onClick={() => setSelectedSkill(skill)}
               >
                 <div className="group flex flex-col items-center gap-2">
-                  <div className="relative">
-                    <div className="w-16 h-16 rounded-full bg-dark-panel border-2 border-cyan/40 flex items-center justify-center transition-all duration-300 group-hover:border-cyan group-hover:shadow-neon group-hover:scale-110">
-                      <Icon className="w-7 h-7 text-cyan" />
-                    </div>
-                    {/* Level Badge */}
-                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-cyan to-purple-500 flex items-center justify-center border-2 border-dark-bg">
-                      <span className="text-xs font-bold text-white">{skill.level}</span>
-                    </div>
+                  <div className="w-16 h-16 rounded-full bg-dark-panel border-2 border-purple/40 flex items-center justify-center transition-all duration-300 group-hover:border-purple group-hover:shadow-neon group-hover:scale-110">
+                    <Icon className="w-7 h-7 text-purple" />
                   </div>
-                  <span className="font-mono text-sm text-cyan/80 uppercase tracking-wider font-semibold whitespace-nowrap">{skill.name}</span>
-                  {/* XP Bar */}
-                  <div className="w-20 h-1 bg-dark-bg rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-cyan to-purple-500"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
+                  <span className="font-mono text-sm text-purple/80 uppercase tracking-wider font-semibold whitespace-nowrap">{skill.name}</span>
                 </div>
               </div>
             );

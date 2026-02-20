@@ -1,44 +1,30 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export default function GokuModel() {
   const groupRef = useRef<THREE.Group>(null);
-  const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 });
-  
   const { scene } = useGLTF('/son_goku.glb');
-
-  // Handle pointer events (works for both mouse and touch)
-  const handlePointerMove = (e: any) => {
-    const x = (e.clientX / window.innerWidth) * 2 - 1;
-    const y = -(e.clientY / window.innerHeight) * 2 + 1;
-    
-    setTargetRotation({
-      y: x * 1.5,
-      x: y * 0.5
-    });
-  };
-
-  // Add event listener
-  if (typeof window !== 'undefined') {
-    window.addEventListener('pointermove', handlePointerMove);
-  }
+  const { viewport } = useThree();
   
   useFrame((state) => {
     if (groupRef.current) {
       // Gentle floating animation
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.15;
       
-      // Smooth rotation towards target
+      // Mouse-controlled rotation with faster speed
+      const x = (state.mouse.x * viewport.width) / 2;
+      const y = (state.mouse.y * viewport.height) / 2;
+      
       groupRef.current.rotation.y = THREE.MathUtils.lerp(
         groupRef.current.rotation.y,
-        targetRotation.y,
+        x * 0.6,
         0.1
       );
       groupRef.current.rotation.x = THREE.MathUtils.lerp(
         groupRef.current.rotation.x,
-        targetRotation.x,
+        y * 0.2,
         0.1
       );
     }

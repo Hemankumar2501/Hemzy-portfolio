@@ -53,12 +53,11 @@ function Scene() {
 
 export default function Character3D() {
   return (
-    <div className="w-full h-full" style={{ position: 'relative' }}>
+    <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 1, 6], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
-        style={{ background: 'transparent' }}
       >
         <Scene />
       </Canvas>

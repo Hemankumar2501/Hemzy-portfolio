@@ -2,7 +2,6 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Character3D from '../components/3d/Character3D';
-import { Trophy, Star, Zap } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,8 +14,6 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const microTopRef = useRef<HTMLSpanElement>(null);
   const microBottomRef = useRef<HTMLSpanElement>(null);
-  const levelBadgeRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -30,11 +27,6 @@ export default function Hero() {
         .fromTo(microTopRef.current, 
           { opacity: 0 }, 
           { opacity: 1, duration: 0.6 }
-        )
-        .fromTo(levelBadgeRef.current, 
-          { scale: 0, opacity: 0 }, 
-          { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(2)' }, 
-          0.1
         )
         .fromTo(ringsRef.current, 
           { scale: 0.6, opacity: 0 }, 
@@ -51,7 +43,7 @@ export default function Hero() {
           { x: 0, opacity: 1, duration: 0.9, stagger: 0.06 }, 
           0.4
         )
-        .fromTo([subheadRef.current, statsRef.current, ctaRef.current], 
+        .fromTo([subheadRef.current, ctaRef.current], 
           { y: 24, opacity: 0 }, 
           { y: 0, opacity: 1, duration: 0.7, stagger: 0.08 }, 
           0.6
@@ -71,7 +63,8 @@ export default function Hero() {
           pin: true,
           scrub: 0.6,
           onLeaveBack: () => {
-            gsap.set([characterRef.current, headlineRef.current, subheadRef.current, ctaRef.current, ringsRef.current, microTopRef.current, microBottomRef.current, levelBadgeRef.current, statsRef.current], {
+            // Reset all elements when scrolling back to top
+            gsap.set([characterRef.current, headlineRef.current, subheadRef.current, ctaRef.current, ringsRef.current, microTopRef.current, microBottomRef.current], {
               opacity: 1, x: 0, y: 0, scale: 1
             });
           }
@@ -90,12 +83,12 @@ export default function Hero() {
           { x: '10vw', opacity: 0, ease: 'power2.in' },
           0.7
         )
-        .fromTo([subheadRef.current, statsRef.current, ctaRef.current], 
+        .fromTo([subheadRef.current, ctaRef.current], 
           { x: 0, opacity: 1 },
           { x: '10vw', opacity: 0, ease: 'power2.in' },
           0.72
         )
-        .fromTo([ringsRef.current, levelBadgeRef.current], 
+        .fromTo(ringsRef.current, 
           { scale: 1, opacity: 1 },
           { scale: 1.25, opacity: 0, ease: 'power2.in' },
           0.7
@@ -119,39 +112,24 @@ export default function Hero() {
       {/* Starfield background */}
       <div className="absolute inset-0 starfield opacity-50" />
       
+      {/* Data grid overlay */}
+      <div className="absolute inset-0 data-grid opacity-30" />
+      
       {/* Micro labels */}
       <span 
         ref={microTopRef} 
         className="absolute top-8 left-8 micro-label opacity-0"
       >
-        PLAYER: HEMANKUMAR
+        <span className="inline-block w-2 h-2 bg-green rounded-full mr-2 animate-pulse" />
+        SYSTEM: ONLINE
       </span>
       <span 
         ref={microBottomRef} 
         className="absolute bottom-8 right-8 micro-label opacity-0"
       >
         SCROLL TO EXPLORE
+        <span className="inline-block ml-2">↓</span>
       </span>
-
-      {/* Level Badge */}
-      <div 
-        ref={levelBadgeRef}
-        className="absolute left-[8vw] top-[16vh] opacity-0"
-        style={{ zIndex: 5 }}
-      >
-        <div className="relative">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan via-purple-500 to-pink-500 p-1 animate-pulse-slow">
-            <div className="w-full h-full rounded-full bg-dark-bg flex flex-col items-center justify-center">
-              <span className="text-xs text-cyan font-mono">LEVEL</span>
-              <span className="text-3xl font-orbitron font-bold text-white">4</span>
-              <span className="text-xs text-muted-foreground font-mono">YEAR</span>
-            </div>
-          </div>
-          <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center animate-bounce-slow">
-            <Trophy className="w-4 h-4 text-dark-bg" />
-          </div>
-        </div>
-      </div>
 
       {/* Neon rings behind character */}
       <div 
@@ -163,7 +141,7 @@ export default function Hero() {
         }}
       >
         <div className="absolute inset-0 rounded-full border border-cyan/40 animate-rotate-slow" />
-        <div className="absolute inset-4 rounded-full border border-cyan/30 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
+        <div className="absolute inset-4 rounded-full border border-purple/30 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
         <div className="absolute inset-8 rounded-full border border-cyan/20 animate-rotate-slow" style={{ animationDuration: '30s' }} />
       </div>
 
@@ -178,63 +156,43 @@ export default function Hero() {
 
       {/* Headline block */}
       <div 
-        className="absolute left-[56vw] top-[22vh] w-[38vw]"
+        className="absolute left-[56vw] top-[26vh] w-[38vw]"
         style={{ zIndex: 4 }}
       >
         <div ref={headlineRef}>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="px-3 py-1 rounded-full bg-cyan/20 border border-cyan/40 text-cyan text-xs font-mono">
-              AI ENGINEER
-            </span>
-            <span className="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 text-xs font-mono">
-              DATA SCIENTIST
-            </span>
+          <div className="micro-label mb-3">
+            <span className="text-cyan">●</span> AI & DATA SCIENCE ENGINEER
           </div>
           <h1 className="font-orbitron font-bold text-[clamp(44px,5.2vw,84px)] text-white leading-tight">
             <span className="word inline-block">HEMAN</span>
             <span className="word inline-block text-cyan neon-text">KUMAR</span>
           </h1>
-          <div className="flex items-center gap-2 mt-2">
-            <div className="h-1 w-20 bg-gradient-to-r from-cyan via-purple-500 to-pink-500 rounded-full" />
-            <span className="text-sm text-muted-foreground font-mono">BTech AI & DS</span>
+          <div className="mt-4 flex items-center gap-3">
+            <div className="h-px w-12 bg-gradient-to-r from-cyan to-transparent" />
+            <span className="font-mono text-sm text-purple">BTech AI & DS '26</span>
           </div>
         </div>
         
         <p 
           ref={subheadRef}
-          className="mt-6 text-lg text-muted-foreground max-w-md opacity-0"
+          className="mt-6 text-lg text-muted-foreground max-w-md opacity-0 leading-relaxed"
         >
-          Level 4 AI Engineer on a quest to master machine learning, deep learning, and data science. Currently grinding through real-world projects and competitive coding challenges.
+          Transforming raw data into intelligent solutions. Specialized in <span className="text-cyan">Machine Learning</span>, <span className="text-purple">Deep Learning</span>, and <span className="text-cyan">Data Analysis</span>.
         </p>
-
-        {/* Stats Bar */}
-        <div 
-          ref={statsRef}
-          className="mt-6 grid grid-cols-3 gap-4 opacity-0"
-        >
-          <div className="glass-panel rounded-xl p-3">
-            <div className="flex items-center gap-2 mb-1">
-              <Star className="w-4 h-4 text-yellow-500" />
-              <span className="text-xs text-muted-foreground font-mono">XP</span>
-            </div>
-            <div className="text-2xl font-orbitron font-bold text-white">111</div>
-            <div className="text-xs text-cyan">Problems Solved</div>
+        
+        {/* Stats mini cards */}
+        <div className="mt-6 grid grid-cols-3 gap-3 max-w-md opacity-0" ref={subheadRef}>
+          <div className="data-card p-3">
+            <div className="text-2xl font-bold text-cyan">111</div>
+            <div className="text-xs text-muted-foreground">LeetCode</div>
           </div>
-          <div className="glass-panel rounded-xl p-3">
-            <div className="flex items-center gap-2 mb-1">
-              <Zap className="w-4 h-4 text-cyan" />
-              <span className="text-xs text-muted-foreground font-mono">SKILLS</span>
-            </div>
-            <div className="text-2xl font-orbitron font-bold text-white">8+</div>
-            <div className="text-xs text-cyan">Tech Mastered</div>
+          <div className="data-card p-3">
+            <div className="text-2xl font-bold text-purple">34</div>
+            <div className="text-xs text-muted-foreground">Repos</div>
           </div>
-          <div className="glass-panel rounded-xl p-3">
-            <div className="flex items-center gap-2 mb-1">
-              <Trophy className="w-4 h-4 text-purple-500" />
-              <span className="text-xs text-muted-foreground font-mono">RANK</span>
-            </div>
-            <div className="text-2xl font-orbitron font-bold text-white">1398</div>
-            <div className="text-xs text-cyan">LeetCode Rating</div>
+          <div className="data-card p-3">
+            <div className="text-2xl font-bold text-green">2+</div>
+            <div className="text-xs text-muted-foreground">Internships</div>
           </div>
         </div>
         
@@ -247,7 +205,7 @@ export default function Hero() {
             }}
             className="btn-cyan"
           >
-            View Quests
+            View Projects
           </a>
           <a 
             href="#contact" 
@@ -257,7 +215,7 @@ export default function Hero() {
             }}
             className="btn-outline"
           >
-            Connect
+            Get in Touch
           </a>
         </div>
       </div>

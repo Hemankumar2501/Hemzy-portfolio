@@ -27,12 +27,20 @@
     --ring: 183 100% 50%;
     --radius: 0.625rem;
     
+    /* AI/Data Science Theme Colors */
     --cyan: #00F0FF;
+    --cyan-light: #5FF5FF;
+    --cyan-dark: #00A8B8;
     --purple: #B829F7;
+    --purple-light: #D65FFF;
     --pink: #FF2D8D;
     --green: #2DFF6F;
+    --orange: #FF8C42;
+    --yellow: #FFD93D;
     --dark-bg: #07080D;
-    --panel-bg: #0E111A;
+    --dark-panel: #0E111A;
+    --dark-card: #12151F;
+    --grid-color: rgba(0, 240, 255, 0.08);
   }
 }
 
@@ -63,15 +71,66 @@
 }
 
 @layer components {
+  /* Data Grid Background */
+  .data-grid {
+    background-image: 
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: -1px -1px;
+  }
+  
+  /* Animated Data Lines */
+  .data-lines {
+    background-image: 
+      linear-gradient(90deg, transparent 0%, var(--cyan) 50%, transparent 100%);
+    background-size: 200% 2px;
+    animation: data-flow 3s linear infinite;
+  }
+  
+  @keyframes data-flow {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  /* Neural Network Effect */
+  .neural-glow {
+    box-shadow: 
+      0 0 20px rgba(0, 240, 255, 0.3),
+      0 0 40px rgba(184, 41, 247, 0.2),
+      inset 0 0 20px rgba(0, 240, 255, 0.1);
+  }
+  
   .neon-text {
     text-shadow: 0 0 10px rgba(0, 240, 255, 0.5),
                  0 0 20px rgba(0, 240, 255, 0.3),
                  0 0 40px rgba(0, 240, 255, 0.2);
   }
   
+  .neon-text-purple {
+    text-shadow: 0 0 10px rgba(184, 41, 247, 0.5),
+                 0 0 20px rgba(184, 41, 247, 0.3),
+                 0 0 40px rgba(184, 41, 247, 0.2);
+  }
+  
   .neon-border {
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.3),
                 inset 0 0 10px rgba(0, 240, 255, 0.1);
+  }
+  
+  .shadow-neon {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4),
+                0 0 40px rgba(0, 240, 255, 0.2);
+  }
+  
+  .shadow-neon-strong {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.6),
+                0 0 60px rgba(0, 240, 255, 0.3),
+                0 0 90px rgba(0, 240, 255, 0.1);
+  }
+  
+  .shadow-card {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   }
   
   .neon-ring {
@@ -160,6 +219,33 @@
   
   .section-pinned {
     @apply relative w-screen h-screen overflow-hidden;
+  }
+  
+  /* Data visualization cards */
+  .data-card {
+    @apply relative p-6 rounded-2xl bg-[#12151F] border border-[#00F0FF]/20;
+    transition: all 0.3s ease;
+  }
+  
+  .data-card:hover {
+    @apply border-[#00F0FF]/50;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  }
+  
+  .data-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .data-card:hover::before {
+    opacity: 1;
   }
 }
 
