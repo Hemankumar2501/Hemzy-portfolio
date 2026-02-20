@@ -18,8 +18,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
+    // Refresh ScrollTrigger after page load
+    ScrollTrigger.refresh();
+    
     // Wait for all ScrollTriggers to be created
     const timeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+      
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
@@ -59,10 +64,18 @@ function App() {
           ease: 'power2.out',
         }
       });
-    }, 100);
+    }, 500);
+
+    // Additional refresh on window load
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    
+    window.addEventListener('load', handleLoad);
 
     return () => {
       clearTimeout(timeout);
+      window.removeEventListener('load', handleLoad);
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
