@@ -4,7 +4,7 @@ import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/Hemzy-portfolio/',
   plugins: [react()],
   resolve: {
     alias: {
