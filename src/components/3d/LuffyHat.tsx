@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 export default function LuffyHat() {
   const groupRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/luffy_hat.glb');
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}luffy_hat.glb`);
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -24,4 +24,4 @@ export default function LuffyHat() {
 }
 
 // Preload the model
-useGLTF.preload('/luffy_hat.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}luffy_hat.glb`);

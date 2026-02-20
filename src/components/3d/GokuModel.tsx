@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 export default function GokuModel() {
   const groupRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/son_goku.glb');
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}son_goku.glb`);
   const { viewport } = useThree();
   
   useFrame((state) => {
@@ -38,4 +38,4 @@ export default function GokuModel() {
 }
 
 // Preload the model
-useGLTF.preload('/son_goku.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}son_goku.glb`);

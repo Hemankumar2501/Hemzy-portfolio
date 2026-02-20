@@ -20,16 +20,9 @@ export default function Hero() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // Set initial visible state as fallback
-      gsap.set([microTopRef.current, ringsRef.current, characterRef.current, headlineRef.current, subheadRef.current, ctaRef.current, microBottomRef.current], {
-        opacity: 1,
-        clearProps: 'all'
-      });
-
       // Entrance animation timeline (auto-play on load)
       const entranceTl = gsap.timeline({ 
-        defaults: { ease: 'power2.out' },
-        delay: 0.1
+        defaults: { ease: 'power2.out' }
       });
       
       entranceTl
