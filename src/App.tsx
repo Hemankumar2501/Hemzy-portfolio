@@ -18,13 +18,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
-    // Simple refresh after mount
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
+    // Detect if mobile device
+    const isMobile = window.innerWidth < 768;
+    
+    // Only initialize ScrollTrigger on desktop
+    if (!isMobile) {
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
 
+      return () => {
+        clearTimeout(timer);
+        ScrollTrigger.getAll().forEach(st => st.kill());
+      };
+    }
+    
+    // On mobile, just ensure content is visible
     return () => {
-      clearTimeout(timer);
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);

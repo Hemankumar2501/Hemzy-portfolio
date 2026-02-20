@@ -18,6 +18,9 @@ export default function Hero() {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    
+    // Check if mobile
+    const isMobile = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
       // Entrance animation timeline (auto-play on load)
@@ -25,81 +28,94 @@ export default function Hero() {
         defaults: { ease: 'power2.out' }
       });
       
-      entranceTl
-        .fromTo(microTopRef.current, 
-          { opacity: 0 }, 
-          { opacity: 1, duration: 0.6 }
-        )
-        .fromTo(ringsRef.current, 
-          { scale: 0.6, opacity: 0 }, 
-          { scale: 1, opacity: 1, duration: 0.9, ease: 'back.out(1.6)' }, 
-          0.2
-        )
-        .fromTo(characterRef.current, 
-          { y: '12vh', opacity: 0 }, 
-          { y: 0, opacity: 1, duration: 1 }, 
-          0.3
-        )
-        .fromTo(headlineRef.current?.querySelectorAll('.word') || [], 
-          { x: '6vw', opacity: 0 }, 
-          { x: 0, opacity: 1, duration: 0.9, stagger: 0.06 }, 
-          0.4
-        )
-        .fromTo([subheadRef.current, ctaRef.current], 
-          { y: 24, opacity: 0 }, 
-          { y: 0, opacity: 1, duration: 0.7, stagger: 0.08 }, 
-          0.6
-        )
-        .fromTo(microBottomRef.current, 
-          { opacity: 0 }, 
-          { opacity: 1, duration: 0.6 }, 
-          0.8
-        );
+      // Simpler animations on mobile
+      if (isMobile) {
+        entranceTl
+          .fromTo([microTopRef.current, headlineRef.current, subheadRef.current, ctaRef.current, microBottomRef.current], 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
+          );
+      } else {
+        // Full desktop animations
+        entranceTl
+          .fromTo(microTopRef.current, 
+            { opacity: 0 }, 
+            { opacity: 1, duration: 0.6 }
+          )
+          .fromTo(ringsRef.current, 
+            { scale: 0.6, opacity: 0 }, 
+            { scale: 1, opacity: 1, duration: 0.9, ease: 'back.out(1.6)' }, 
+            0.2
+          )
+          .fromTo(characterRef.current, 
+            { y: '12vh', opacity: 0 }, 
+            { y: 0, opacity: 1, duration: 1 }, 
+            0.3
+          )
+          .fromTo(headlineRef.current?.querySelectorAll('.word') || [], 
+            { x: '6vw', opacity: 0 }, 
+            { x: 0, opacity: 1, duration: 0.9, stagger: 0.06 }, 
+            0.4
+          )
+          .fromTo([subheadRef.current, ctaRef.current], 
+            { y: 24, opacity: 0 }, 
+            { y: 0, opacity: 1, duration: 0.7, stagger: 0.08 }, 
+            0.6
+          )
+          .fromTo(microBottomRef.current, 
+            { opacity: 0 }, 
+            { opacity: 1, duration: 0.6 }, 
+            0.8
+          );
+      }
 
-      // Scroll-driven exit animation
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-          onLeaveBack: () => {
-            // Reset all elements when scrolling back to top
-            gsap.set([characterRef.current, headlineRef.current, subheadRef.current, ctaRef.current, ringsRef.current, microTopRef.current, microBottomRef.current], {
-              opacity: 1, x: 0, y: 0, scale: 1
-            });
+      // Only add scroll trigger on desktop
+      if (!isMobile) {
+        // Scroll-driven exit animation
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: '+=130%',
+            pin: true,
+            scrub: 0.6,
+            onLeaveBack: () => {
+              // Reset all elements when scrolling back to top
+              gsap.set([characterRef.current, headlineRef.current, subheadRef.current, ctaRef.current, ringsRef.current, microTopRef.current, microBottomRef.current], {
+                opacity: 1, x: 0, y: 0, scale: 1
+              });
+            }
           }
-        }
-      });
+        });
 
-      // Exit animations (70% - 100%)
-      scrollTl
-        .fromTo(characterRef.current, 
-          { x: 0, y: 0, rotateY: 0, opacity: 1 },
-          { x: '-18vw', y: '-10vh', rotateY: -18, opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo(headlineRef.current, 
-          { x: 0, opacity: 1 },
-          { x: '10vw', opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo([subheadRef.current, ctaRef.current], 
-          { x: 0, opacity: 1 },
-          { x: '10vw', opacity: 0, ease: 'power2.in' },
-          0.72
-        )
-        .fromTo(ringsRef.current, 
-          { scale: 1, opacity: 1 },
-          { scale: 1.25, opacity: 0, ease: 'power2.in' },
-          0.7
-        )
-        .fromTo([microTopRef.current, microBottomRef.current], 
-          { opacity: 1 },
-          { opacity: 0, ease: 'power2.in' },
-          0.75
-        );
+        // Exit animations (70% - 100%)
+        scrollTl
+          .fromTo(characterRef.current, 
+            { x: 0, y: 0, rotateY: 0, opacity: 1 },
+            { x: '-18vw', y: '-10vh', rotateY: -18, opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo(headlineRef.current, 
+            { x: 0, opacity: 1 },
+            { x: '10vw', opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo([subheadRef.current, ctaRef.current], 
+            { x: 0, opacity: 1 },
+            { x: '10vw', opacity: 0, ease: 'power2.in' },
+            0.72
+          )
+          .fromTo(ringsRef.current, 
+            { scale: 1, opacity: 1 },
+            { scale: 1.25, opacity: 0, ease: 'power2.in' },
+            0.7
+          )
+          .fromTo([microTopRef.current, microBottomRef.current], 
+            { opacity: 1 },
+            { opacity: 0, ease: 'power2.in' },
+            0.75
+          );
+      }
 
     }, section);
 
